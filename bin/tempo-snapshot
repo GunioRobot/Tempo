@@ -75,18 +75,18 @@ def execute_cmd(task_uuid, instance_uuid, snapshot_name):
     cmd = ['nova-snapshot.sh', instance_uuid, snapshot_name]
 
     logger.debug("task '%(task_uuid)s' started: '%(cmd)s'" % locals())
-    _notify('Started Task') 
+    _notify('Started Task')
 
     p = subprocess.Popen(cmd)
     return_code = os.waitpid(p.pid, 0)[1]
     if return_code == 0:
         logger.debug("task '%(task_uuid)s' finished: returned successfully"
                      % locals())
-        _notify('Finished Task') 
+        _notify('Finished Task')
     else:
         logger.error("task '%(task_uuid)s' errored: ret=%(return_code)s"
                      % locals())
-        _notify('Errored Task', return_code=return_code) 
+        _notify('Errored Task', return_code=return_code)
 
 
 def configure_logging(opts):
